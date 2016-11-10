@@ -4,7 +4,7 @@ Linux, OSX: [![Build Status](https://travis-ci.org/csdms-stack/dakotathon-csdms-
 
 # About csdms-dakotathon
 
-Home: http://csdms-dakota.readthedocs.io
+Home: http://csdms.colorado.edu/wiki/Model:Dakotathon
 
 Package license: MIT
 
