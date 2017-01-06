@@ -3,9 +3,12 @@ import os
 import pymt.components
 
 
-dakota_methods = ('CenteredParameterStudy', 'PolynomialChaos',
-                  'StochasticCollocation', 'MultidimParameterStudy',
-                  'Sampling', 'VectorParameterStudy')
+dakota_methods = ('CenteredParameterStudy',
+                  'MultidimParameterStudy',
+                  'VectorParameterStudy',
+                  'PolynomialChaos',
+                  'Sampling',
+                  'StochasticCollocation')
 
 
 os.mkdir('_testing')
