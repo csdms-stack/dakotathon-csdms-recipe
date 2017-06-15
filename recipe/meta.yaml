@@ -21,3 +21,9 @@ test:
   requires:
     - pymt
     - bmi-tester
+
+about:
+  home: http://csdms.colorado.edu/wiki/Model:Dakotathon
+  license: MIT
+  summary: Dakotathon is a Python wrapper for the Dakota systems analysis toolkit.
+  dev_url: https://github.com/csdms/dakota
