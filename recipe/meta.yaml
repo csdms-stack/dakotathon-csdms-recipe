@@ -9,13 +9,15 @@ package:
 source:
   git_url: https://github.com/csdms/dakota
 
+build:
+  number: 0
+
 requirements:
   build:
-    - bmi-babel
-    - pymt
+    - babelizer
     - dakotathon
   run:
-    - bmi-babel
+    - cca-tools
     - dakotathon
 
 test:
