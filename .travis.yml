@@ -4,10 +4,10 @@ os:
 - osx
 env:
   global:
-  - CONDA_PREFIX=$HOME/miniconda
+  - CONDA_PREFIX=$HOME/conda
   - MINICONDA_URL_BASE="https://repo.continuum.io/miniconda/Miniconda2-latest"
   - TRAVIS_PYTHON_VERSION="2.7"
-  - secure: "RVCXF0ggfIF6buPoyVqoOBECKeSya/ZNf9Be3Ff1t0ibyZXanO5dkjhpxNXU1SimteGPGTU7jo5gbicymoK8Mqs09SermMxkskdEnnxRBLEvNy6eDCqbit5S/SHj1y/uq4vH7Q09XAMkhoVPl3Ifi76tc19fGSe9pFHu0EAhx2TM1fPAO3eJH2SKBBd/F+YKjfXKd56+LTZlGTm6CEaWWHE2u+g/1hFfz1fB/kp/UyiO+GIJSgTcoIyHMliVd9ZWIDVGtz3z/APHUkkPxBn0vdaTqx1dhFHbHmv/uo0FbHzoxBvgxQMpA5N8HNyfVaa4yICVyfYjN3gC/m2ohFa4oCnH6AEH4scXVKYQg9AALng6i0deZGDwgDnohTzwNjOhMuEY7uxOJeDYQtc5WnBeGXRWxR043PH/J7b0BgH+2GqsVJpBoOwSvqe6WSeiJ1gTzSy1vaBtHizn4VcVhM/eI/EUuWQRiG7huBgyR5T409vwEQBtl64dOQSPYyzk7rSOTNrQ2YLuBLBNdghb+6jBYmbs5u5tc6VD4yOQ31npHcZXTJ1sUMgbHFLxgB2WHLV36vPF9oIVqN1RXz83MDbgY9pLnCFb+t8zh2+0mZPmRhGIOxJRlKAVR++7sE1V292jz7aIWyW97VDHGaBh3nGTHfDczZAMY/yKe5lcjENhw3o="
+  - secure: "lK/yvhSzXCn4H+5yHLkiywDhlWyH24/tfo8Mvwlz60GlqEk2id92yuqbT2Fgjd3RiPR6KP0DF+TSJBNfsvuwwYy5KO6s+j61r+InDgE8NnaDaSS4677S7uWt6Z1yTovErGf7g6cyiF7H2YTCkzX1cQ+YPmNo1wnF27533//womjW7rRpRv5n9/z1QPHX8c8Oc1HpBxIfqLHrV/zeCscVPJbTJFUyod3raGfnKnc8Fs7XRdsI45pm/IExlEBvqe/i4JuxIHIEYvXrZb/TMUV1YgGEzZ/5nZQZAGii70aSqh9YBAYjRcLteQ093s6y4S/921K6djTOD5OLZ868XJoTxz8PmEXSRYg3A3jPMqZX4ly0ht7UF8nTurAk7lw3L+4XxI08frsv6SVMOplmn51SL5XevQ2/u4y8fKNK1EHvCTaswQy9rKho3ATfZnlwLu99Xc+UZifjSNnIDYa0YP4cDRfkglBfhGsg5GhOU1uBa+t4p+In4+KzSzCjX/+WNeZyq8lwMF1eGSkpXF0UntXSD7/px/davgLfk2Kvfn+ncVlO+4agGnh9Q4LhRaJ71UXOj9hHEBCAw/FEUenv2tH9Dp49PQTx+Xiz5tSeyce+H/CTAhkdnlwGITUtqfCMz/73bmlgd3hz5eEhAEL/eFffrYriC7f6OJPQ837OkP1KG9Y="
 sudo: false
 before_install:
 - |
@@ -23,16 +23,16 @@ install:
   else
     OS="Linux-x86_64"
   fi
-- curl $MINICONDA_URL_BASE-$OS.sh > $HOME/minconda.sh
-- bash $HOME/minconda.sh -b -p $CONDA_PREFIX
+- curl $MINICONDA_URL_BASE-$OS.sh > $HOME/miniconda.sh
+- bash $HOME/miniconda.sh -b -p $CONDA_PREFIX
 - export PATH="$CONDA_PREFIX/bin:$PATH"
 - hash -r
 - conda config --set always_yes yes --set changeps1 no
 - conda install python=$TRAVIS_PYTHON_VERSION
 - conda install -q conda-build anaconda-client coverage sphinx
 script:
-- conda build ./recipe -c csdms-stack -c conda-forge
+- conda build ./recipe -c csdms-stack -c defaults -c conda-forge --old-build-string
 after_success:
 - curl https://raw.githubusercontent.com/csdms/ci-tools/master/anaconda_upload.py
   > $HOME/anaconda_upload.py
-- echo $ANACONDA_TOKEN | python $HOME/anaconda_upload.py ./recipe --channel=main --org=csdms-stack --token=-
+- echo $ANACONDA_TOKEN | python $HOME/anaconda_upload.py ./recipe --channel=main --org=csdms-stack --old-build-string --token=-
