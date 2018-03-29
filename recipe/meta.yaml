@@ -22,8 +22,7 @@ requirements:
 
 test:
   requires:
-    - pymt
-    - bmi-tester
+    - pymt=0.2
 
 about:
   home: http://csdms.colorado.edu/wiki/Model:Dakotathon
